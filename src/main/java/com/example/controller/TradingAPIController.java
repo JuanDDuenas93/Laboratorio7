@@ -3,8 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 package com.example.controller;
 
 import java.io.BufferedReader;
@@ -16,9 +14,12 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.http.HttpHeaders.USER_AGENT;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,35 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author 2085890
  */
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping(value = "/trading")
+public class TradingAPIController {
+
+    @Autowired
+    TradingServices tradingStub;
+
+    @GetMapping("{source}/{name}/{type}")
+    public ResponseEntity<?> getTradingInfoHandler(@PathVariable("source") String source, @PathVariable("name") String name, @PathVariable("type") String type) {
+        try {
+            return new ResponseEntity<>(tradingStub.getTradingInfo(name, type, source), HttpStatus.ACCEPTED);
+        } catch (TradingServicesException ex) {
+            Logger.getLogger(TradingServicesException.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error retreiving", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("{source}/{name}/{type}/{date}")
+    public ResponseEntity<?> getTradingInfoHandler(@PathVariable("source") String source, @PathVariable("name") String name, @PathVariable("type") String type, @PathVariable("date") String date) {
+        try {
+            return new ResponseEntity<>(tradingStub.getTradingInfo(name, type, date, source), HttpStatus.ACCEPTED);
+        } catch (TradingServicesException ex) {
+            Logger.getLogger(TradingServicesException.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error fetching", HttpStatus.NOT_FOUND);
+        }
+    }
+
+}
 /*
 @RestController
 @RequestMapping(value = "/Trading")
