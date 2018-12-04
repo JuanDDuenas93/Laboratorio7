@@ -27,13 +27,13 @@ public class HttpConnectionToAlphaVantage implements HttpConnectionInterface{
 
     @Override
     public String getTradingInfo(String name, String type, String interval) throws TradingServicesException {
-        String GET_URL = String.format("https://www.alphavantage.co/query?function=%s&symbol=%s&interval=%s&apikey=Q1QZFVJQ21K7C6XM", tradingInfo.get(type), name, interval);
+        String GET_URL = String.format("https://www.alphavantage.co/query?function=%s&symbol=%s&interval=%s&apikey=BSK04RWGZFOT5SRB", tradingInfo.get(type), name, interval);
         return getTradingInfo(GET_URL);
     }
 
     @Override
     public String getTradingInfo(String name, String type) throws TradingServicesException {
-        String GET_URL = String.format("https://www.alphavantage.co/query?function=%s&symbol=%s&apikey=Q1QZFVJQ21K7C6XM", tradingInfo.get(type), name);
+        String GET_URL = String.format("https://www.alphavantage.co/query?function=%s&symbol=%s&apikey=BSK04RWGZFOT5SRB", tradingInfo.get(type), name);
         return getTradingInfo(GET_URL);
     }
 }

@@ -7,11 +7,13 @@ package com.example.controller;
 
 import com.example.persistence.TradingPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author JuanDuenas
  */
+@Service
 public class TradingServicesStub implements TradingServices{
 
     @Autowired

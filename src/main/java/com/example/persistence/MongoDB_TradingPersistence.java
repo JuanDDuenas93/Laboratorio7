@@ -26,7 +26,7 @@ public class MongoDB_TradingPersistence implements TradingPersistence{
     public String getTradingInfo(String name, String type, String source) throws TradingServicesException {
         
         HttpConnectionInterface externalAPI = HttpConnectionInterface.getExternalAPI(source);
-        TradingInfo tradingInfo = repo.searchByKey(source + name + type);
+        TradingInfo tradingInfo = repo.findByKey(source + name + type);
         if (tradingInfo == null) {
             String data = externalAPI.getTradingInfo(name, type);
             tradingInfo = new TradingInfo(name, type, source, data);
@@ -38,7 +38,7 @@ public class MongoDB_TradingPersistence implements TradingPersistence{
     @Override
     public String getTradingInfo(String name, String type, String interval, String source) throws TradingServicesException {
         HttpConnectionInterface externalAPI = HttpConnectionInterface.getExternalAPI(source);
-        TradingInfo tradingInfo = repo.searchByKey(source + name + type + interval);
+        TradingInfo tradingInfo = repo.findByKey(source + name + type + interval);
         if (tradingInfo == null) {
             String data = externalAPI.getTradingInfo(name, type);
             tradingInfo = new TradingInfo(name, type, source, interval, data);

@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface TradingRepository extends MongoRepository<TradingInfo, String>{
     
-    public TradingInfo searchByKey(String key);
+    public TradingInfo findByKey(String key);
     
 }
     
